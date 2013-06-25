@@ -129,13 +129,13 @@ class PositionableBehavior extends ModelBehavior {
 		$element = $Model->find('first', array(
 			'conditions' => array($Model->alias . '.id' => $elementId),
 			'contain' => array()
-				));
+		));
 
 		if (empty($element)) {
 			throw new NotFoundException(__d('positionable', 'Invalid Element', true));
 		}
 
-		$from = $element[$Model->alias]['position'];
+		$from = empty($element[$Model->alias]['position']) ? PHP_INT_MAX : $element[$Model->alias]['position'];
 		$element[$Model->alias]['position'] = $to;
 
 		$success = true;

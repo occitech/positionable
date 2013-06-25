@@ -261,6 +261,29 @@ class PositionableBehaviorTest extends CakeTestCase {
 		$this->assertEqual($element['PositionByItselfElement']['position'], 2);
 	}
 
+	public function testMoveUnpositionedElementPositionItAtTheEndWithoutUpdatingOthers() {
+		$Model = ClassRegistry::init('PositionableElement');
+		$preconditionsOk = $Model->updateAll(
+			array('PositionableElement.position' => null),
+			array('PositionableElement.id' => 'positionable-element-2')
+		);
+		$this->assertTrue($preconditionsOk);
+
+		$success = $Model->move('positionable-element-2', 2);
+		$newOrder = Hash::combine(
+			$Model->find('all', array('order' => 'position ASC')),
+			'{n}.PositionableElement.id',
+			'{n}.PositionableElement.position'
+		);
+
+		$expectedOrder = array(
+			'positionable-element-1' => 1,
+			'positionable-element-2' => 2,
+		);
+		$this->assertTrue($success);
+		$this->assertEquals($expectedOrder, $newOrder);
+	}
+
 /**
  * Test the before/afterDelete callbacks
  */
