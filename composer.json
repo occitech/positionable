@@ -1,0 +1,17 @@
+{
+  "name": "occitech/positionable",
+  "type": "cakephp-plugin",
+  "description": "Positionable Behavior for CakePHP",
+  "keywords": ["cakephp","positionable"],
+  "homepage": "http://www.occitech.fr",
+  "license": "MIT",
+  "authors": [
+    {
+    "name": "Occitech",
+    "homepage": "http://www.occitech.fr"
+  }
+  ],
+  "require": {
+    "composer/installers": "*"
+  }
+}
